@@ -1573,6 +1573,7 @@ function ProjectModal({ work, onClose }: { work: WorkItem; onClose: () => void }
     <motion.div
       ref={scrollContainerRef}
       role="presentation"
+      data-modal-backdrop
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -1594,6 +1595,7 @@ function ProjectModal({ work, onClose }: { work: WorkItem; onClose: () => void }
       <motion.div
         ref={panelRef}
         role="dialog"
+        data-modal-panel
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
@@ -1806,9 +1808,18 @@ export function ShowcaseClient() {
         <style>{`
           @media (max-width: 820px) {
             [data-work-row] { grid-template-columns: minmax(0, 1fr) !important; }
-            [data-work-row] > div { order: 0 !important; }
+            /* "> *", not "> div" — the thumbnail slot is a button element
+               (both the image and "PREVIEW PENDING" placeholder variants, so
+               a visitor can open the case study either way), which a div-only
+               selector silently skips. On reverse rows that left the
+               button's own inline order:2 unset while the text column's
+               order:1 got reset to 0, so the thumbnail rendered AFTER the
+               text on mobile instead of before it — image-first is the
+               intended reading order regardless of the desktop left/right
+               alternation. */
+            [data-work-row] > * { order: 0 !important; }
             [data-about-grid] { grid-template-columns: minmax(0, 1fr) !important; }
-            [data-about-grid] > div { order: 0 !important; }
+            [data-about-grid] > * { order: 0 !important; }
             /* Nav: five links no longer fit a row without shrinking touch
                targets below accessible tap-size minimums — swap for the
                hamburger toggle + full-screen menu instead. */
@@ -1876,6 +1887,15 @@ export function ShowcaseClient() {
               height: min(140px, 16vh) !important;
               background: linear-gradient(to bottom, ${PAPER}, rgba(243, 239, 230, 0)) !important;
             }
+            /* The project modal's chrome (backdrop padding + panel padding)
+               was sized for desktop, where 6vw/28px floor is a small
+               fraction of the viewport — on a ~390px phone it eats over a
+               quarter of the width before any content starts, which matters
+               most for the live iframe embed (Burnout Force Check) and the
+               SitePreview screenshots, both of which want every pixel of
+               width they can get. */
+            [data-modal-backdrop] { padding: 3vh 3vw !important; }
+            [data-modal-panel] { padding: 20px 16px !important; }
           }
           .showcase-focus { border-radius: 2px; }
           .showcase-focus:focus-visible {
