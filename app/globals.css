@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — dark, warm-neutral base, single amber accent.
+  Register is inverted from a design portfolio on purpose: mono-led
+  display type (code-forward), sans body, tighter radii. Dark works
+  here because the work being shown is screenshots of UI/data, not
+  black-heavy print design that a dark frame would swallow.
+*/
+
+:root {
+  /* Surface — warm near-black, never pure #000 */
+  --bg: #14120f;
+  --bg-raised: #1c1915;
+  --bg-sunken: #0e0c0a;
+
+  /* Foreground — warm off-white */
+  --fg: #f2ede4;
+  --fg-muted: #9c9284;
+  --fg-subtle: #635c51;
+
+  /* Line */
+  --rule: #2c2822;
+  --rule-strong: #423c33;
+
+  /* Accent — one accent. Warm amber, never neon terminal-green. */
+  --accent: #e0a458;
+  --accent-quiet: #e0a45814;
+
+  /* Background grid texture — faint, never as strong as a real border */
+  --grid-line: #2c282233;
+
+  /* Radius — tighter than an editorial site, still not sharp */
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 8px;
+  --r-full: 9999px;
+
+  /* Motion easing */
+  --ease-default: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.32, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-bg-sunken: var(--bg-sunken);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-quiet: var(--accent-quiet);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+
+  /* Mono leads (headings, eyebrows, data). Sans is body only — inverted
+     from a serif-led editorial register. Martian Mono / IBM Plex Sans, not
+     Geist — project-standards/01-frontend.md §7 bans Geist as a sole
+     typeface (too overused in AI-generated UI to read as distinctive). */
+  --font-mono-display: var(--font-martian-mono, ui-monospace, monospace);
+  --font-sans: var(--font-plex-sans, ui-sans-serif, system-ui, sans-serif);
+}
+
+body {
+  background:
+    radial-gradient(ellipse 900px 500px at 50% -10%, var(--accent-quiet), transparent),
+    repeating-linear-gradient(
+      to right,
+      var(--grid-line) 0,
+      var(--grid-line) 1px,
+      transparent 1px,
+      transparent 64px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--grid-line) 0,
+      var(--grid-line) 1px,
+      transparent 1px,
+      transparent 64px
+    ),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  * {
+    @apply border-rule outline-rule-strong/50;
+  }
+}

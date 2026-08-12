@@ -1,0 +1,35 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# production
+/build
+
+# env
+.env*.local
+.env
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc
+.DS_Store
+*.pem
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+
+# private/local-only, not part of the portfolio itself
+/project-standards
+/Portfolio - Sakura Scroll (standalone).html
+/.agents
+/.codex
+/.claude
