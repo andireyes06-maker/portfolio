@@ -2173,10 +2173,10 @@ export function ShowcaseClient() {
                   <div key="eyebrow" style={{ fontSize: 12, letterSpacing: "0.42em", color: MUTED }}>
                     PORTFOLIO: 二〇二六
                   </div>,
-                  <h1 key="name" style={{ margin: 0, fontSize: "clamp(38px, 4.6vw, 64px)", fontWeight: 800, lineHeight: 1.08 }}>
+                  <h1 key="name" style={{ margin: 0, fontSize: "clamp(44px, 5.6vw, 78px)", fontWeight: 800, lineHeight: 1.06 }}>
                     {NAME}
                   </h1>,
-                  <p key="tagline" style={{ margin: 0, fontSize: "clamp(16px, 1.5vw, 19px)", lineHeight: 1.6, color: "#443f36" }}>
+                  <p key="tagline" style={{ margin: 0, fontSize: "clamp(18px, 1.8vw, 22px)", lineHeight: 1.6, color: "#443f36" }}>
                     Full-stack developer building real experience, one project, one client, one problem at a time.
                   </p>,
                   <div key="rule" style={{ width: 120, height: 3, background: ACCENT }} />,
@@ -2346,8 +2346,8 @@ export function ShowcaseClient() {
                 <div style={{ fontSize: 15, letterSpacing: "0.4em", color: "#d98a96" }}>人</div>
                 <h2 style={{ margin: 0, fontSize: "clamp(30px, 3.4vw, 46px)", fontWeight: 800, letterSpacing: "0.06em" }}>About</h2>
               </div>
-              <div style={{ position: "relative", width: "min(220px, 60vw)", aspectRatio: "1" }}>
-                <div style={{ position: "absolute", inset: 0, border: "1px solid #6b6355", transform: "translate(10px, 10px)" }} />
+              <div style={{ position: "relative", width: "min(300px, 65vw)", aspectRatio: "1" }}>
+                <div style={{ position: "absolute", inset: 0, border: "1px solid #6b6355", transform: "translate(12px, 12px)" }} />
                 <img
                   src="/showcase/portrait.png"
                   alt={`Portrait of ${NAME}`}
