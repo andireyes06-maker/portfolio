@@ -33,3 +33,5 @@ yarn-error.log*
 /.agents
 /.codex
 /.claude
+.vercel
+.env*
