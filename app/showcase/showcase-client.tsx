@@ -1825,21 +1825,6 @@ export function ShowcaseClient() {
                hamburger toggle + full-screen menu instead. */
             [data-nav-links] { display: none !important; }
             [data-nav-toggle] { display: flex !important; }
-            /* About illustration is position:absolute, so it never joins
-               data-about-grid's own mobile single-column stacking above —
-               its clamp() floor (300px) is wider than a phone viewport and
-               it was overlapping the heading/portrait placeholder by
-               ~230px. Shrink and tuck it into the top-right corner instead,
-               clear of the grid content starting at left. transform:none
-               cancels the desktop vertical-centering translateY, which
-               doesn't apply here since this uses a fixed top offset instead. */
-            [data-about-illustration] {
-              left: auto !important;
-              right: 2vw !important;
-              top: -3vh !important;
-              width: clamp(140px, 40vw, 220px) !important;
-              transform: none !important;
-            }
             /* Samurai/text overlap in the pinned Journey section: samurai is
                sized by height:80vh with no mobile cap, so on a narrow/tall
                phone viewport its scaled width covers most of the screen and
@@ -2287,71 +2272,28 @@ export function ShowcaseClient() {
           <img src="/showcase/about-deco-large-2.png" alt="" aria-hidden style={{ position: "absolute", right: "-8vw", bottom: "-10vh", width: "48vw", filter: "invert(1)", mixBlendMode: "screen", opacity: 0.08, pointerEvents: "none" }} />
           <img src="/showcase/about-deco-small-1.png" alt="" aria-hidden style={{ position: "absolute", right: "12vw", top: "16vh", width: 44, filter: "invert(1)", mixBlendMode: "screen", opacity: 0.18, transform: "rotate(40deg)", pointerEvents: "none" }} />
           <img src="/showcase/about-deco-small-2.png" alt="" aria-hidden style={{ position: "absolute", left: "8vw", bottom: "12vh", width: 34, filter: "invert(1)", mixBlendMode: "screen", opacity: 0.14, transform: "rotate(-70deg)", pointerEvents: "none" }} />
-          <div data-about-grid style={{ position: "relative", display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 2fr)", gap: "clamp(32px, 5vw, 80px)", alignItems: "start" }}>
-            {/* about.png's own frame is mostly empty in its upper-left, which
-                is why it can sit this close to the heading without fighting
-                it. Positioned relative to the grid (not the section) and
-                vertically centered against it — was pinned to a fixed offset
-                from the section's own top instead, which put its center
-                ~240px above the text block's actual center once the About
-                copy grew past a single short paragraph. The ink figure was
-                painted for a cream backdrop (like torii-gate/mountain-peak) —
-                its dark strokes sit almost flush with this section's near-
-                black background, so a soft warm glow behind just the figure
-                (not the whole frame) restores the contrast it needs to read,
-                without looking like a boxed-in illustration slot. */}
-            <div
-              data-about-illustration
-              // Narrower than before (was clamp(400,38vw,580)) — centering
-              // it against the now much-taller grid (5 paragraphs, was 1)
-              // put the figure's widest point, the robe/base, directly over
-              // paragraph text instead of the empty margin it had at the
-              // old, shorter grid height. Narrowing restores clearance
-              // instead of abandoning the centering fix.
-              style={{ position: "absolute", left: "7vw", top: "50%", transform: "translateY(-50%)", width: "clamp(300px, 28vw, 420px)" }}
-            >
-              <div
-                aria-hidden
+          <div data-about-grid style={{ position: "relative", display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: "clamp(32px, 5vw, 80px)", alignItems: "stretch" }}>
+            {/* Portrait now fills its column edge-to-edge instead of sitting
+                as a small fixed-size square — with the ink figure gone,
+                a small photo floating in an otherwise-equal column just
+                left a lot of bare dark space beside it. alignItems:
+                "stretch" on the grid (was "start") makes this column match
+                the text column's own height, and object-fit: cover crops
+                the portrait to fill it rather than letterboxing. */}
+            <div style={{ position: "relative", minHeight: 420 }}>
+              <div style={{ position: "absolute", inset: 0, border: "1px solid #6b6355", transform: "translate(14px, 14px)" }} />
+              <img
+                src="/showcase/portrait.png"
+                alt={`Portrait of ${NAME}`}
                 style={{
                   position: "absolute",
-                  left: "32%",
-                  top: "22%",
-                  width: "58%",
-                  height: "66%",
-                  background: "radial-gradient(ellipse at center, rgba(243,239,230,0.4), rgba(243,239,230,0.14) 55%, transparent 75%)",
-                  filter: "blur(20px)",
-                  pointerEvents: "none",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  border: "1px solid rgba(243, 239, 230, 0.3)",
                 }}
               />
-              <img
-                src="/showcase/about.png"
-                alt=""
-                aria-hidden
-                // The backing glow only lifts contrast at the figure's
-                // silhouette edge — its interior (ink strokes painted for a
-                // cream backdrop) still read as near-black-on-near-black.
-                // brightness+contrast lifts the strokes themselves so the
-                // robe's folds and the figure's form are actually legible,
-                // not just its outline.
-                style={{ position: "relative", display: "block", width: "100%", pointerEvents: "none", filter: "brightness(1.55) contrast(0.92)" }}
-              />
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
-              <div style={{ position: "relative", width: "min(300px, 65vw)", aspectRatio: "1" }}>
-                <div style={{ position: "absolute", inset: 0, border: "1px solid #6b6355", transform: "translate(12px, 12px)" }} />
-                <img
-                  src="/showcase/portrait.png"
-                  alt={`Portrait of ${NAME}`}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    border: "1px solid rgba(243, 239, 230, 0.3)",
-                  }}
-                />
-              </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
               {/* Kanji + heading now sit directly above the paragraphs they
