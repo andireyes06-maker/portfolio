@@ -2272,17 +2272,12 @@ export function ShowcaseClient() {
           <img src="/showcase/about-deco-large-2.png" alt="" aria-hidden style={{ position: "absolute", right: "-8vw", bottom: "-10vh", width: "48vw", filter: "invert(1)", mixBlendMode: "screen", opacity: 0.08, pointerEvents: "none" }} />
           <img src="/showcase/about-deco-small-1.png" alt="" aria-hidden style={{ position: "absolute", right: "12vw", top: "16vh", width: 44, filter: "invert(1)", mixBlendMode: "screen", opacity: 0.18, transform: "rotate(40deg)", pointerEvents: "none" }} />
           <img src="/showcase/about-deco-small-2.png" alt="" aria-hidden style={{ position: "absolute", left: "8vw", bottom: "12vh", width: 34, filter: "invert(1)", mixBlendMode: "screen", opacity: 0.14, transform: "rotate(-70deg)", pointerEvents: "none" }} />
-          <div data-about-grid style={{ position: "relative", display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: "clamp(32px, 5vw, 80px)", alignItems: "stretch" }}>
-            {/* Portrait fills most of its column instead of sitting as a
-                small fixed-size square — with the ink figure gone, a small
-                photo floating in an otherwise-equal column just left a lot
-                of bare dark space beside it. alignItems: "stretch" on the
-                grid (was "start") makes this column match the text
-                column's own height, and object-fit: cover crops the
-                portrait to fill it. A small even margin insets it slightly
-                rather than running fully edge-to-edge, which read too big
-                against the text column. */}
-            <div style={{ position: "relative", minHeight: 380, margin: 28 }}>
+          <div data-about-grid style={{ position: "relative", display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: "clamp(32px, 5vw, 80px)", alignItems: "start" }}>
+            {/* Portrait has its own fixed size instead of stretching
+                (alignItems was "stretch") to match the text column's
+                height — with five paragraphs beside it, matching that
+                height made the photo far bigger than it should read as. */}
+            <div style={{ position: "relative", width: "min(340px, 100%)", aspectRatio: "4 / 5" }}>
               <div style={{ position: "absolute", inset: 0, border: "1px solid #6b6355", transform: "translate(14px, 14px)" }} />
               <img
                 src="/showcase/portrait.png"
